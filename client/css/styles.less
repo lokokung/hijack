@@ -1,4 +1,10 @@
 body {
+    text-align: center;
+}
+
+body:after {
+    display:none;
+    content: url("img/spinner.gif");
 }
 
 h4 {
@@ -6,6 +12,7 @@ h4 {
 }
 
 h5 {
+    text-align: left;
     position: relative;
     top: 1px;
     font-size: 18px;
@@ -13,8 +20,26 @@ h5 {
     padding: 3px 0;
 }
 
-.controls {
-    text-align: center;
+.announcement {
+    font-size: 0.8em;
+    color: #000099;
+    border-top: 1px solid #e1e1e1;
+    margin-top: 25px;
+    padding-top: 10px;
+    margin-bottom: -20px;
+}
+
+.high-load-message {
+    font-size: 0.6em;
+    color: #777777;
+    margin-top: 30px;
+    padding-top: 5px;
+    border-top: 1px solid #e1e1e1;
+    margin-bottom: -25px;
+}
+
+.button-container {
+    margin-top: 10px;
 }
 
 .main-content {
@@ -26,21 +51,56 @@ h5 {
     color: #aaa;
     font-size: 10px;
     text-align: center;
+    margin-bottom: 30px;
 }
 
 a {
     color: #999;
 }
 
+.alert {
+    font-size: 12px;
+    line-height: 14px;
+    margin-bottom: 20px;
+}
+
+.alert-error {
+    color: #d00000;
+}
+
+.alert button {
+    display: none;
+}
+
+.spinner {
+    display: inline-block;
+    height: 32px;
+    width: 32px;
+    background: url("img/spinner.gif");
+}
+
 .language-list {
+    font-family: "Open Sans", "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    display: none;
     text-align: center;
-    margin: -20px 0 5px 0;
+    margin: -20px 0 15px 0;
 }
 
 .language-list li {
     list-style-type: none;
     display: inline-block;
     padding-right: 5px;
+    margin-bottom: 0;
+}
+
+@media (min-width: 550px) {
+    .language-list {
+        display: block;
+    }
+
+    .language-select {
+        display: none;
+    }
 }
 
 .access-code {
@@ -117,6 +177,7 @@ a {
 }
 
 .lobby-player-list > li {
+    text-align: left;
     position:relative; /* Create a positioning context */
     margin:0 0 6px 2em; /* Give each list item a left margin to make room for the numbers */
     padding:4px 8px; /* Add some spacing around the content */
@@ -137,12 +198,69 @@ a {
     box-sizing:border-box;
     width:2em;
     margin-right:8px;
-    padding:4px;
+    padding: 5px 4px 3px 4px;
     background:transparent;
     font-weight:bold;
     font-family:"Helvetica Neue", Arial, sans-serif;
     text-align:center;
     background-color: #f9f9f9;
+}
+
+.btn-remove-player {
+    float: right;
+    position: relative;
+    right: 1px;
+}
+
+.btn-edit-player {
+    float: right;
+}
+
+.game-countdown {
+    color: #333;
+    text-decoration: none;
+
+    &:active, &:focus, &:hover {
+        color: #333;
+    }
+
+    &.paused {
+        span {
+            animation: blink 2s steps(2, start) infinite;
+            -webkit-animation: blink 2s steps(2, start) infinite;
+
+            @keyframes blink {
+              to {
+                visibility: hidden;
+              }
+            }
+
+            @-webkit-keyframes blink {
+              to {
+                visibility: hidden;
+              }
+            }
+        }
+    }
+
+    &.finished {
+        animation: blink 1s steps(2, start) 10;
+        -webkit-animation: blink 1s steps(2, start) 10;
+
+        @keyframes blink {
+          to {
+            visibility: hidden;
+          }
+        }
+
+        @-webkit-keyframes blink {
+          to {
+            visibility: hidden;
+          }
+        }
+    }
+
+    cursor: pointer;
 }
 
 .player-status {
@@ -205,23 +323,35 @@ a {
 }
 
 .location-list {
-    overflow: hidden;
+    -moz-column-count: 2;
+    -webkit-column-count: 2;
+    column-count: 2;
+    -moz-column-gap: 4px;
+    -webkit-column-gap: 4px;
+    column-gap: 4px;
 }
 
 .location-list li {
+    display: inline-block;
+    width: 100%;
+    text-align: left;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
-    width: 50%;
-    float: left;
     list-style-type: none;
-    padding: 0 4px 0 0;
+    background-color: #f9f9f9;
     margin: 0 0 4px 0;
+    cursor: pointer;
 }
 
 .location-list li .location-name {
-    background-color: #f9f9f9;
     padding: 3px 10px;
+}
+
+.location-list li .location-name-striked {
+    padding: 3px 10px;
+    color: #bbb;
+    text-decoration: line-through;
 }
 
 .ingame-player-list {
@@ -229,6 +359,7 @@ a {
 }
 
 .ingame-player-list li {
+    text-align: left;
     -moz-box-sizing:border-box;
     -webkit-box-sizing:border-box;
     box-sizing:border-box;
@@ -237,11 +368,19 @@ a {
     list-style-type: none;
     padding: 0 4px 0 0;
     margin: 0 0 4px 0;
+    cursor: pointer;
 }
 
 .ingame-player-list li .player-name {
     background-color: #f9f9f9;
     padding: 3px 10px;
+}
+
+.ingame-player-list li .player-name-striked {
+    background-color: #f9f9f9;
+    padding: 3px 10px;
+    color: #bbb;
+    text-decoration: line-through;
 }
 
 .first-player-indicator {
@@ -265,6 +404,13 @@ a {
 .location-reference, .player-reference {
     overflow: hidden;
 }
+
+input[type="text"] {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 280px;
+    height: 48px;
+  }
 
 @media (max-width: 340px) {
   .location-list li {
