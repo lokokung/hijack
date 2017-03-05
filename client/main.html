@@ -88,23 +88,6 @@
 </template>
 
 <template name="footer">
-  {{#if languages }}
-    <div dir="ltr" class="languages">
-      <select class="language-select">
-        {{#each languages }}
-            <option value="{{code}}" {{selected}}>{{toCapitalCase languageDetails.name}}</option>
-        {{/each}}
-      </select>
-      <ul class="language-list">
-        {{#each languages }}
-          <li>
-            <a class="btn-set-language" href="#" data-language="{{code}}">{{toCapitalCase languageDetails.name}}</a>
-          </li>
-        {{/each}}
-      </ul>
-    </div>
-  {{/if}}
-
   <div class="footer">
     {{{_ "ui.footer" }}}
     <br>
