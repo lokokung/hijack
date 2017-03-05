@@ -118,6 +118,7 @@ Games.find({"state": 'settingUp'}).observeChanges({
   }
 });
 
+
 Messages.find().observeChanges({
     added: function (id, msg) {
 	var game = Games.findOne(msg.gameID);
@@ -126,9 +127,27 @@ Messages.find().observeChanges({
 	    var players = Players.find({gameID: msg.gameID});
 
 	    if (messages.count() === players.count()) {
-		Games.update(msg.gameID, {$set: {state: 'startHijack'}, $inc: {round: 1}});
+		Games.update(msg.gameID, {$set: {state: 'startHijack'}});
 	    }
 	}
     }
 });
-	    
+
+
+Players.find().observeChanges({
+    added: function (id, player) {
+	var game = Games.findOne(player.gameID);
+	if (game) {
+	    var players = Players.find({gameID: game._id});
+	    var allVotesIn = true;
+	    players.forEach(function(player, index) {
+		if (!player.vote) {
+		    allVotesIn = false;
+		}
+	    });
+	}
+	if (allVotesIn) {
+	    Games.update(player.gameID, {$set: {state: 'doneVoting'}});
+	}
+    }
+});

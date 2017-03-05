@@ -121,12 +121,18 @@ function trackGameState () {
     return;
   }
 
-  if(game.state === "inProgress"){
-    //Session.set("currentView", "gameView"); 
+  if (game.state === "inProgress") {
+    Session.set("currentView", "gameView"); 
     //Session.set("currentView", "distractView");
-    Session.set("currentView", "revealView");
+    //Session.set("currentView", "hijackView");
   } else if (game.state === "waitingForPlayers") {
     Session.set("currentView", "lobby");
+  } else if (game.state === "startHijack" && player.isSpy) {
+    Session.set("currentView", "hijackView");
+  } else if (game.state === "startHijack") {
+    Session.set("currentView", "distractView");
+  } else if (game.state === "revealMsg") {
+    Session.set("currentView", "revealView");
   }
 }
 

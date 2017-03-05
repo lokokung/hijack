@@ -33,7 +33,7 @@ Template.distractView.events({
     if (!answer || gameFinished) {
       return false;
     } else {
-      Session.set("currentView", "startMenu");
+      // Session.set("currentView", "startMenu");
     }
   }
 });
