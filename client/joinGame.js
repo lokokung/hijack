@@ -23,7 +23,8 @@ function generateNewPlayer(game, name){
     name: name,
     role: null,
     isSpy: false,
-    isFirstPlayer: false
+    isFirstPlayer: false,
+    isLeader: false
   };
 
   var playerID = Players.insert(player);

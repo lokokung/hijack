@@ -236,6 +236,10 @@ Template.lobby.helpers({
   isLoading: function() {
     var game = getCurrentGame();
     return game.state === 'settingUp';
+  },
+  isStarting: function() {
+    var player = getCurrentPlayer();
+    return player.isLeader;
   }
 });
 
