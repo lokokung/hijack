@@ -64,6 +64,8 @@ Template.hijackView.events({
     // Update Messages 
       console.log(newMessage);
       event.preventDefault();
+      console.log(this.id);
+      Messages.update(this.id, {$set: {msgContent: newMessage}});
       Games.update(Session.get("gameID"), {$set: {state: 'revealMsg'}});
       Session.set("currentView", "revealView");
   },

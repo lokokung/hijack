@@ -135,8 +135,8 @@ Messages.find().observeChanges({
 
 
 Players.find().observeChanges({
-    added: function (id, player) {
-	var game = Games.findOne(player.gameID);
+    changed: function (oldOne) {
+	var game = Games.findOne(oldOne.gameID);
 	if (game) {
 	    var players = Players.find({gameID: game._id});
 	    var allVotesIn = true;

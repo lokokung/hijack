@@ -27,7 +27,8 @@ function getTimeRemaining(){
 }
 
 Template.distractView.events({
-  'submit #random-question': function (event) {
+    'submit #random-question': function (event) {
+	event.preventDefault();
     var answer = event.target.playerAnswer.value;
 
     if (!answer) {
