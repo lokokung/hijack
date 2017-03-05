@@ -31,15 +31,12 @@
     </div>
   </div>
 
-  <h5>{{_ "ui.players" }}</h5>
+  <h5>Select Receiver</h5>
   <ul class="ingame-player-list">
     {{#each players }}
       <li>
         <div class="player-name">
           {{ name }}
-          {{#if isFirstPlayer}}
-            <div class="first-player-indicator">{{{_ "ui.first" }}}</div>
-          {{/if}}
         </div>
       </li>
     {{/each}}
@@ -47,15 +44,13 @@
 
   <div class="u-cf"></div>
   
-  <h5>{{_ "ui.location reference" }}</h5>
-  <ul class="location-list">
-    {{#each locations }}
-      <li>
-        <div class="location-name">{{_ name }}</div>
-      </li>
-    {{/each}}
-  </ul>
+  <h5>Private Message</h5>
 
+  <form id="message">
+    <input type="text" class="message-input" id="private-message" name="privateMessage" placeholder="Message..." />
+    <input type="submit" value="Send">
+  </form>
+    
   <hr>
 
   <div class="button-container">
