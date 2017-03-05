@@ -56,19 +56,30 @@ Template.joinGame.events({
         accessCode: accessCode
       });
 
-      if (game) {
+      if (game && !nameTaken) {
         Meteor.subscribe('players', game._id);
-        player = generateNewPlayer(game, playerName);
 
-        if (game.state === "inProgress") {
-          var default_role = game.location.roles[game.location.roles.length - 1];
-          Players.update(player._id, {$set: {role: default_role}});
+        var nameTaken = false;
+        var player = Players.findOne({gameID: game._id, name: playerName});
+        if (player != null) {
+          nameTaken = true;
         }
 
-        Session.set('urlAccessCode', null);
-        Session.set("gameID", game._id);
-        Session.set("playerID", player._id);
-        Session.set("currentView", "lobby");
+        if (!nameTaken) {
+          player = generateNewPlayer(game, playerName);
+
+          if (game.state === "inProgress") {
+            var default_role = game.location.roles[game.location.roles.length - 1];
+            Players.update(player._id, {$set: {role: default_role}});
+          }
+
+          Session.set('urlAccessCode', null);
+          Session.set("gameID", game._id);
+          Session.set("playerID", player._id);
+          Session.set("currentView", "lobby");
+        } else {
+          FlashMessages.sendError(TAPi18n.__("This name is already taken."));
+        }
       } else {
         FlashMessages.sendError(TAPi18n.__("ui.invalid access code"));
         GAnalytics.event("game-actions", "invalidcode");

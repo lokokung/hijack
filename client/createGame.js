@@ -14,7 +14,7 @@ function generateNewGame(){
     accessCode: generateAccessCode(),
     state: "waitingForPlayers",
     location: null,
-    lengthInMinutes: 8,
+    lengthInMinutes: 3,
     endTime: null,
     paused: false,
     pausedTime: null
