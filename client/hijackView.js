@@ -27,15 +27,17 @@ function getTimeRemaining(){
 }
 
 function getMessages(messagesArray) {
-  messages = [];
-  for (var i = 0; i < messagesArray.length; i++) {
-    var fromPlayer = Players.findOne(messagesArray[i].sendFrom);
-    var toPlayer = Players.findOne(messagesArray[i].sendTo);
+    messages = [];
+    messagesArray.forEach( function(msg, index) {
+	var fromPlayer = Players.findOne(msg.sendFrom);
+	var toPlayer = Players.findOne(msg.sendTo);
 
-    var message = { id: i, message: messagesArray[i].msgContent, 
-                    from: fromPlayer.name, to: toPlayer.name };
-    messages.push(message);
-  }
+	var message = { id: msg._id, message: msg.msgContent, 
+			from: fromPlayer.name, to: toPlayer.name };
+	messages.push(message);
+    });
+
+    return messages;
 }
 
 function setButtonActive(id) {
@@ -56,14 +58,12 @@ var messages = null;
 
 Template.hijackView.events({
   'submit': function (event) {
-    Session.set("currentView", "startMenu"); // TEST
     var inputId = "message-" + this.id;
     var newMessage = document.getElementById(inputId).value;
 
     // Update Messages 
     console.log(newMessage);
-    
-    Session.set("currentView", "startMenu");
+    Games.update(Session.get("gameID"), {$set: {state: 'revealMsg'}});
   },
   'click .messages-input': function () {
     setButtonActive(this.id);
@@ -88,14 +88,14 @@ Template.hijackView.helpers({
     return timeRemaining === 0;
   },
   messages: function () {
-    var msg1 = { message: 'hello', from: 'me', to: 'you', id: '050'};
-    var msg2 = { message: 'hi', from: 'you', to: 'me', id: '1'};
-    messages = [msg1, msg2];
-    return messages;
-
-    // var game = getCurrentGame();
-    // var messagesArray = Messages.find({gameID: game._id, roundNum: game.round});
-    // getMessages(messagesArray);
+    // var msg1 = { message: 'hello', from: 'me', to: 'you', id: '050'};
+    // var msg2 = { message: 'hi', from: 'you', to: 'me', id: '1'};
+    // messages = [msg1, msg2];
     // return messages;
+
+    var game = getCurrentGame();
+    var messagesArray = Messages.find({gameID: game._id, roundNum: game.round});
+    getMessages(messagesArray);
+    return messages;
   }
 });
