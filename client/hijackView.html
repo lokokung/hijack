@@ -13,9 +13,7 @@
       <span class="to-from">{{from}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{to}}</span><br>
       <input type="text" class="messages-input" id="message-{{id}}" name="message{{id}}" value="{{message}}"><br>
       <span class="button-container">
-        {{#if active }}
-          <input type="submit" value='Replace'>
-        {{/if}}
+        <input type="submit" id="btn-{{id}}" value='Replace' style="display: none;">
       </span>
     </div>
   </form>

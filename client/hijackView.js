@@ -33,21 +33,21 @@ function getMessages(messagesArray) {
     var toPlayer = Players.findOne(messagesArray[i].sendTo);
 
     var message = { id: i, message: messagesArray[i].msgContent, 
-                    from: fromPlayer.name, to: toPlayer.name, active: false };
+                    from: fromPlayer.name, to: toPlayer.name };
     messages.push(message);
   }
 }
 
 function setButtonActive(id) {
-  var inputId = "message-" + id;
-
   for (var i = 0; i < messages.length; i++) {
-    console.log(id);
+    var inputId1 = "message-" + messages[i].id;
+    var inputId2 = 'btn-' + messages[i].id;
+
     if (messages[i].id != id) {
-      messages[i].active = false;
-      document.getElementById(inputId).value = messages[i].message;
+      document.getElementById(inputId1).value = messages[i].message;
+      document.getElementById(inputId2).style.display = "none";
     } else {
-      messages[i].active = true;
+      document.getElementById(inputId2).style.display = "inline";
     }
   }
 }
@@ -61,6 +61,7 @@ Template.hijackView.events({
     var newMessage = document.getElementById(inputId).value;
 
     // Update Messages 
+    console.log(newMessage);
     
     Session.set("currentView", "startMenu");
   },
@@ -87,8 +88,8 @@ Template.hijackView.helpers({
     return timeRemaining === 0;
   },
   messages: function () {
-    var msg1 = { message: 'hello', from: 'me', to: 'you', id: '050', active: false};
-    var msg2 = { message: 'hi', from: 'you', to: 'me', id: '1', active: false};
+    var msg1 = { message: 'hello', from: 'me', to: 'you', id: '050'};
+    var msg2 = { message: 'hi', from: 'you', to: 'me', id: '1'};
     messages = [msg1, msg2];
     return messages;
 
