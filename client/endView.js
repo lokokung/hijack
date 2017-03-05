@@ -74,8 +74,8 @@ Template.endView.helpers({
   voteRank: function () {
     var game = getCurrentGame();
     var players = Players.find({'gameID': game._id});
-    var votes = {"a":1, "b":3, "c":2};
-    /*var votes = {};
+    //var votes = {"a":1, "b":3, "c":2};
+    var votes = {};
       players.forEach(function(player){
         if (!player.isSpy){
           votedFor = Players.findOne({gameID: game._id, _id: player.vote});
@@ -85,7 +85,7 @@ Template.endView.helpers({
             votes[votedFor.name] = 1;
           }
         }
-      }); */
+      }); 
 
     var rank = [];
     for (var key in votes) {
@@ -108,15 +108,15 @@ Template.endView.helpers({
     var players = Players.find({'gameID': game._id});
     num_clean_players = players.count() - 1;
     spy = Players.findOne({'gameID': game._id, isSpy : true});
-    num_spy_votes = 0.6;
-    /*players.forEach(function(player){
+    //num_spy_votes = 0.6;
+    players.forEach(function(player){
       if (!player.isSpy){
         votedFor = Players.findOne({gameID: game._id, _id: player.vote});
         if (votedFor.name == spy.name){
           num_spy_votes = num_spy_votes + 1;
         }
       }
-    });*/
+    });
     console.log(num_spy_votes);
     if (num_spy_votes > num_clean_players / 2.0){
       return false;
