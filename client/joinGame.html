@@ -1,0 +1,25 @@
+<template name="joinGame">
+  <h4>
+    {{#if isLoading }}
+      <span class="spinner"></span>
+    {{else}}
+      {{_ "ui.welcome to spyfall" }}
+    {{/if}}
+  </h4>
+
+  <hr>
+
+  <form id="join-game">  
+    <div>
+      <input autocorrect="off" autocapitalize="off" type="text" id="access-code" name="accessCode" placeholder='{{_ "ui.enter an access code" }}'>
+      <input type="text" id="player-name" name="playerName" placeholder='{{_ "ui.enter your name" }}'>
+
+      {{> flashMessages}}
+
+      <div class="button-container">
+        <input type="submit" value='{{_ "ui.join" }}'>
+        <button class="btn-back">{{_ "ui.back" }}</button>
+      </div>
+    </div>
+  </form>
+</template>
