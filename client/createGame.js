@@ -31,6 +31,7 @@ function generateNewPlayer(game, name){
     gameID: game._id,
     name: name,
     role: null,
+    vote: null,
     isSpy: false,
     isFirstPlayer: false
   };
