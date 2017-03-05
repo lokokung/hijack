@@ -15,7 +15,7 @@ function getCurrentPlayer(){
 }
 
 function generateNewMessage(game, from, to, msg) {
-  var msg = {
+  var message = {
     gameID: game._id,
     roundNum: game.round,
     sendFrom: from._id,
@@ -23,8 +23,9 @@ function generateNewMessage(game, from, to, msg) {
     msgContent: msg
   };
 
-  var msgID = Messages.insert(msg);
-  console.log(msgID);
+    var msgID = Messages.insert(message);
+
+    return Messages.findOne(msgID);
 }
 
 function leaveGame () {
@@ -135,16 +136,18 @@ Template.gameView.events({
   },
   'submit #message': function (event) {
      if (currentReceiver) {
-       var receiverName = $(currentReceiver).parent().text();
+       var receiverName = $(currentReceiver).parent().text().trim();
+       console.log(receiverName);
        var game = getCurrentGame();
-	   
-       var gameID = game._id;
-       var roundNum = game.round;
        var sendFrom = getCurrentPlayer();
        var sendTo = Players.findOne({gameID: game._id, name: receiverName});
-       var msg = event.target.privateMessage.value;
-       console.log(msg);
-       generateNewMessage(gameID, roundNum, sendFrom, sendTo, msg);
+	 var msg = event.target.privateMessage.value;
+	 console.log(msg);
+	 
+	 var message = generateNewMessage(game, sendFrom, sendTo, msg);
+
+	 Meteor.subscribe('messages', game._id);
+	 
        event.target.className = 'hide-message-input';
        document.getElementById('confirmation-message').className = 'display-confirmation';
      } else {

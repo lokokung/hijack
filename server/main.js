@@ -92,6 +92,10 @@ Meteor.publish('players', function(gameID) {
   return Players.find({"gameID": gameID});
 });
 
+Meteor.publish('messages', function(gameID) {
+    return Messages.find({"gameID": gameID});
+});
+
 Games.find({"state": 'settingUp'}).observeChanges({
   added: function (id, game) {
     var location = getRandomLocation();
@@ -113,3 +117,18 @@ Games.find({"state": 'settingUp'}).observeChanges({
     Games.update(id, {$set: {state: 'inProgress', location: location, endTime: gameEndTime, paused: false, pausedTime: null}});
   }
 });
+
+Messages.find().observeChanges({
+    added: function (id, msg) {
+	var game = Games.findOne(msg.gameID);
+	if (game) {
+	    var messages = Messages.find({gameID: msg.gameID, roundNum: game.round});
+	    var players = Players.find({gameID: msg.gameID});
+
+	    if (messages.count() === players.count()) {
+		Games.update(msg.gameID, {$set: {state: 'startHijack'}, $inc: {round: 1}});
+	    }
+	}
+    }
+});
+	    

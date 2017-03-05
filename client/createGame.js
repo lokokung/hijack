@@ -18,7 +18,7 @@ function generateNewGame(){
     endTime: null,
     paused: false,
     pausedTime: null,
-    round: 0  
+    round: 0
   };
 
   var gameID = Games.insert(game);
