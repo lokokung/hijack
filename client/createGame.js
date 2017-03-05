@@ -14,7 +14,7 @@ function generateNewGame(){
     accessCode: generateAccessCode(),
     state: "waitingForPlayers",
     location: null,
-    lengthInMinutes: 8,
+    lengthInMinutes: 3,
     endTime: null,
     paused: false,
     pausedTime: null
@@ -31,8 +31,10 @@ function generateNewPlayer(game, name){
     gameID: game._id,
     name: name,
     role: null,
+    knows: null,
     isSpy: false,
-    isFirstPlayer: false
+    isFirstPlayer: false,
+    isLeader: true
   };
 
   var playerID = Players.insert(player);
