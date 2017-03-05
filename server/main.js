@@ -93,7 +93,7 @@ Games.find({"state": 'settingUp'}).observeChanges({
 
     assignCleanPlayers(players, spyIndex, players.count());
 
-    Games.update(id, {$set: {state: 'inProgress', location: location, endTime: gameEndTime, paused: false, pausedTime: null}});
+    Games.update(id, {$set: {state: 'inProgress', location: null, endTime: gameEndTime, paused: false, pausedTime: null}});
   }
 });
 
