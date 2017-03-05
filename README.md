@@ -9,3 +9,6 @@ The details on gameplay are posted below the buttons on the homepage.
 
 # Tools and Technologies
 Meteor.js, Handlebars.js, MongoDB, JavaScript, CSS
+
+# Play
+Come play at http://hijack-play.herokuapp.com/!
