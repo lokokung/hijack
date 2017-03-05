@@ -137,6 +137,8 @@ Template.gameView.events({
        var msg = event.target.privateMessage.value;
        console.log(msg);
        generateNewMessage(gameID, roundNum, sendFrom, sendTo, msg);
+       event.target.className = 'hide-message-input';
+       document.getElementById('confirmation-message').className = 'display-confirmation';
      } else {
        FlashMessages.sendError("Please select someone to message.");
      }
