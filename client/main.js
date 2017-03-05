@@ -136,7 +136,7 @@ function trackGameState () {
   } else if (game.state === "voting") {
       Session.set("currentView", "voteView");
   } else if (game.state === "doneVoting") {
-    Session.set("currentView", "endView")
+    Session.set("currentView", "endView");
   }
 }
 

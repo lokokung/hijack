@@ -17,8 +17,12 @@
     {{/each}}
   </ul>
 
-  <div class="button-container">
+  <div id="confirm_button" class="button-container">
       <button id="btn-confirm-vote">{{_ "Confirm" }}</button>
+  </div>
+
+  <div class="hidden-confirmation" id="confirmation-message">
+    <h6>Waiting for others to vote...</h6>
   </div>
 
   {{> flashMessages}}

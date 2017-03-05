@@ -42,8 +42,19 @@ function getTimeRemaining(){
   return timeRemaining;
 }
 
+function generateNewVote(game, voteFrom, voteFor) {
+  var vote = {
+    gameID: game._id,
+    voter:  voteFrom._id,
+    voted:  voteFor._id
+  };
+  var voteID = Votes.insert(vote);
+  return Votes.findOne(voteID);
+}
+
 function recordVote(game, voteFrom, voteFor) {
   Players.update(voteFrom._id, {$set: {vote: voteFor._id}});
+  vote = generateNewVote(game, voteFrom, voteFor);
 }
 
 Template.voteView.helpers({
@@ -121,7 +132,10 @@ Template.voteView.events({
 
       var voteFrom = getCurrentPlayer();
       var voteFor  = Players.findOne({gameID: game._id, name: votedName});
-      recordVote(game._id, voteFrom, voteFor)
+      recordVote(game, voteFrom, voteFor)
+
+      event.target.className = 'hide-confirm-button';
+      document.getElementById('confirmation-message').className = 'display-confirmation';
     } else {
       FlashMessages.sendError("Please select a player.");
     }

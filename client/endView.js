@@ -108,7 +108,8 @@ Template.endView.helpers({
     var players = Players.find({'gameID': game._id});
     num_clean_players = players.count() - 1;
     spy = Players.findOne({'gameID': game._id, isSpy : true});
-    //num_spy_votes = 0.6;
+
+    num_spy_votes = 0.0;
     players.forEach(function(player){
       if (!player.isSpy){
         votedFor = Players.findOne({gameID: game._id, _id: player.vote});
@@ -117,7 +118,6 @@ Template.endView.helpers({
         }
       }
     });
-    console.log(num_spy_votes);
     if (num_spy_votes > num_clean_players / 2.0){
       return false;
     }
