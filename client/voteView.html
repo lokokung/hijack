@@ -1,0 +1,31 @@
+<template name="voteView">
+  <h4><a class="game-countdown {{#if gameFinished }}finished{{/if}} {{#if game.paused }}paused{{/if}}">{{{ timeRemaining }}}</a></h4>
+
+  {{#if player.isSpy }}
+  <h5>{{_ "Other players are voting on the hijacker." }}</h5>
+  <br>
+
+  {{else}}
+  <h5>{{_ "Who do you think is the hijacker?" }}</h5>
+  <ul class="ingame-player-list">
+    {{#each players }}
+      <li>
+        <div class="player-name">
+          {{ name }}
+        </div>
+      </li>
+    {{/each}}
+  </ul>
+
+  <div class="button-container">
+      <button id="btn-confirm-vote">{{_ "Confirm" }}</button>
+  </div>
+
+  {{> flashMessages}}
+
+  {{/if}}
+
+  <div class="u-cf"></div>
+  
+  
+</template>
