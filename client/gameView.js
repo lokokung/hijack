@@ -14,6 +14,19 @@ function getCurrentPlayer(){
   }
 }
 
+function generateNewMessage(game, from, to, msg) {
+  var msg = {
+    gameID: game._id,
+    roundNum: game.round,
+    sendFrom: from._id,
+    sendTo: to._id,
+    msgContent: msg
+  };
+
+  var msgID = Messages.insert(msg);
+  console.log(msgID);
+}
+
 function leaveGame () {
   GAnalytics.event("game-actions", "gameleave");
   var player = getCurrentPlayer();
@@ -41,6 +54,8 @@ function getTimeRemaining(){
 
   return timeRemaining;
 }
+
+var currentReceiver = null;
 
 Template.gameView.helpers({
   game: getCurrentGame,
@@ -106,15 +121,36 @@ Template.gameView.events({
     }
   },
   'click .player-name': function (event) {
-    event.currentTarget.className = 'player-name-striked';
+      event.currentTarget.className = 'player-name-selected';
+      if (currentReceiver) {
+          currentReceiver.className = 'player-name';
+      }
+      currentReceiver = event.currentTarget;
+      var selectedPlayer = $(event.currentTarget).parent().text();
+      console.log(selectedPlayer);
   },
-  'click .player-name-striked': function(event) {
-    event.currentTarget.className = 'player-name';
+  'click .player-name-selected': function(event) {
+      event.currentTarget.className = 'player-name';
+      currentReceiver = null;
   },
-  'click .location-name': function (event) {
-    event.target.className = 'location-name-striked';
-  },
-  'click .location-name-striked': function(event) {
-    event.target.className = 'location-name';
+  'submit #message': function (event) {
+     if (currentReceiver) {
+       var receiverName = $(currentReceiver).parent().text();
+       var game = getCurrentGame();
+	   
+       var gameID = game._id;
+       var roundNum = game.round;
+       var sendFrom = getCurrentPlayer();
+       var sendTo = Players.findOne({gameID: game._id, name: receiverName});
+       var msg = event.target.privateMessage.value;
+       console.log(msg);
+       generateNewMessage(gameID, roundNum, sendFrom, sendTo, msg);
+       event.target.className = 'hide-message-input';
+       document.getElementById('confirmation-message').className = 'display-confirmation';
+     } else {
+       FlashMessages.sendError("Please select someone to message.");
+     }
+
+    return false;
   }
 });

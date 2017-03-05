@@ -383,6 +383,11 @@ a {
     text-decoration: line-through;
 }
 
+.ingame-player-list li .player-name-selected {
+    background-color: #32cd32;
+    padding: 3px 10px;
+}
+
 .first-player-indicator {
     display: inline;
     color: #ff0000;
@@ -403,6 +408,28 @@ a {
 
 .location-reference, .player-reference {
     overflow: hidden;
+}
+
+.message-input {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 280px;
+    max-height: 38px;
+}
+
+.hide-message-input {
+    display: none;
+}
+
+.hidden-confirmation {
+    display: none;
+}
+
+.display-confirmation {
+    text-align: left;
+    position: relative;
+    font-size: 12px;
+    display: inline;
 }
 
 input[type="text"] {
