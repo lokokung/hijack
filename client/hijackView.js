@@ -63,7 +63,8 @@ Template.hijackView.events({
 
     // Update Messages 
     console.log(newMessage);
-    Games.update(Session.get("gameID"), {$set: {state: 'revealMsg'}});
+      Games.update(Session.get("gameID"), {$set: {state: 'revealMsg'}});
+      Session.set("currentView", "revealView");
   },
   'click .messages-input': function () {
     setButtonActive(this.id);
@@ -77,7 +78,7 @@ Template.hijackView.helpers({
     var timeRemaining = getTimeRemaining();
 
     if (timeRemaining <= 0) {
-      Session.set("currentView", "startMenu");
+      // Session.set("currentView", "startMenu");
     } 
 
     return moment(timeRemaining).format('mm[<span>:</span>]ss');
