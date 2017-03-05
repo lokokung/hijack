@@ -1,0 +1,18 @@
+<template name="revealView">
+  <h4>Reveal</h4>
+
+  <hr>
+
+  {{#each messages}}  
+  <div class="message-output"> 
+    <div class="to-from"><strong>{{from}}</strong></div>
+    <br><span class="message-content">{{message}}</span>
+  </div>
+  {{/each}}
+
+  <br>
+  {{#if isStarting }}
+    <button class="btn-continue">Next Round</button>
+  {{/if}}
+
+</template>
