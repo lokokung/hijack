@@ -18,3 +18,5 @@ amplify
 mrt:flash-messages
 less
 meteorhacks:kadira
+twbs:bootstrap
+peppelg:bootstrap-3-modal

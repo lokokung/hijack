@@ -4,6 +4,9 @@ Template.startMenu.events({
   },
   'click #btn-join-game': function () {
     Session.set("currentView", "joinGame");
+  },
+  'click .new-player-option': function() {
+    Modal.show('instructions');
   }
 });
 

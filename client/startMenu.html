@@ -19,3 +19,32 @@
     {{/if}}
   </div>
 </template>
+
+<template name="instructions">
+  <div class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h4 class="modal-title">How to Play</h4>
+        </div>
+
+        <div class="modal-body">
+          <span><strong>Requirements:</strong> </span><br>
+          <span>3 or More Players</span><br><br>
+          <span><strong>Objective:</strong> </span><br>
+          <span>The hijacker aims to avoid being detected by the others. The rest of the players seek to expose the hijacker by the end of several rounds. </span><br><br>
+          <span><strong>Overview:</strong></span><br>
+          <span>For all players except the hijacker, they are told the name of exactly one other person who is innocent at the beginning of the game. For each round, every player chooses exactly one person to send a single message to (think wisely about what to say!). Toward the end of the round, the hijacker is able to observe <i>all</i> the messages sent between players and choose exactly one to modify in whatever way he or she wishes. Each player then receives the messages addressed to him or her without knowing whether the hijacker has changed one of the messages or not.</span><br><br>
+          <span>After five or so rounds, all players must anonymously vote to decide who they think is the hijacker. They win if they are able to sniff out the bad egg amongst them, but if they cannot come to a consensus, they've been hijacked!</span>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default btn-modal" data-dismiss="modal">Close</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</template>
+
