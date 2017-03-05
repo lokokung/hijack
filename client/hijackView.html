@@ -10,7 +10,7 @@
   {{#each messages}}
   <form class="changed-msg">  
     <div>
-      <span class="to-from">{{from}} <i class="fa fa-arrow-right" aria-hidden="true"></i> {{to}}</span><br>
+      <span class="to-from"><strong>{{from}}</strong> <i class="fa fa-arrow-right" aria-hidden="true"></i> <strong>{{to}}</strong></span><br>
       <input type="text" class="messages-input" id="message-{{id}}" name="message{{id}}" value="{{message}}"><br>
       <span class="button-container">
         <input type="submit" id="btn-{{id}}" value='Replace' style="display: none;">
