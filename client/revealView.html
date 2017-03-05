@@ -8,9 +8,13 @@
     <div class="from"><strong>{{from}}</strong></div>
     <span class="message-content">{{message}}</span>
   </div>
+  {{else}}
+  <span>You didn't receive anything this round. <i class="fa fa-meh-o"></i></span>
   {{/each}}
 
   <br>
+  {{ #if isStarting }}
     <button class="btn-continue">Next Round</button>
+  {{/if}}
 
 </template>

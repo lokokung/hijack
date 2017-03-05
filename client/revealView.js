@@ -60,5 +60,9 @@ Template.revealView.helpers({
       console.log(player._id);
    var messagesArray = Messages.find({gameID: game._id, roundNum: game.round, sendTo: player._id});
    return getMessages(messagesArray);
+  },
+  isStarting: function() {
+    var player = getCurrentPlayer();
+    return player.isLeader;
   }
 });
