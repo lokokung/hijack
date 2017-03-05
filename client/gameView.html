@@ -1,45 +1,23 @@
 <template name="gameView">
-  <h4><a class="game-countdown {{#if gameFinished }}finished{{/if}} {{#if game.paused }}paused{{/if}}">{{{ timeRemaining }}}</a></h4>
 
   <div class="status-container">
     <button class="btn-toggle-status">{{_ "ui.show hide" }}</button>
 
     <div class="status-container-content">
       {{#if player.isSpy }}
-        <div class="player-status player-status-spy">{{_ "ui.you are the spy" }}</div>
+        <div class="player-status player-status-spy">You are the hijacker.</div>
       {{else}}
-        <div class="player-status player-status-not-spy">{{{_ "ui.you are not the spy" }}}</div>
-
-        <div class="current-location">
-          <div class="current-location-header">
-            {{_ "ui.the location" }}:
-          </div>
-          <div class="current-location-name">
-            {{_ game.location.name }}
-          </div>
-        </div>
-
-        <div class="current-role">
-          <div class="current-role-header">
-            {{_ "ui.your role" }}:
-          </div>
-          <div class="current-role-name">
-            {{_ player.role }}
-          </div>
-        </div>
+        <div class="player-status player-status-not-spy">You know {{ knownPlayer.name }} isn't the hijacker.</div>
       {{/if}}
     </div>
   </div>
 
-  <h5>{{_ "ui.players" }}</h5>
+  <h5>Select Receiver</h5>
   <ul class="ingame-player-list">
     {{#each players }}
       <li>
         <div class="player-name">
           {{ name }}
-          {{#if isFirstPlayer}}
-            <div class="first-player-indicator">{{{_ "ui.first" }}}</div>
-          {{/if}}
         </div>
       </li>
     {{/each}}
@@ -47,19 +25,25 @@
 
   <div class="u-cf"></div>
   
-  <h5>{{_ "ui.location reference" }}</h5>
-  <ul class="location-list">
-    {{#each locations }}
-      <li>
-        <div class="location-name">{{_ name }}</div>
-      </li>
-    {{/each}}
-  </ul>
+  <h5>Private Message</h5>
 
+  <form id="message">
+    <input type="text" class="message-input" id="private-message" name="privateMessage" placeholder="Message..." />
+    <input type="submit" value="Send">
+  </form>
+
+  {{> flashMessages}}
+
+  <div class="hidden-confirmation" id="confirmation-message">
+    <h6>Waiting for others to message...</h6>
+  </div>
+  
   <hr>
 
   <div class="button-container">
-    <button class="btn-end">{{_ "ui.end game" }}</button>
+    {{#if isStarting }}
+      <button class="btn-end">{{_ "ui.end game" }}</button>
+    {{/if}}
     <button class="btn-leave">{{_ "ui.leave game" }}</button>
   </div>
 </template>

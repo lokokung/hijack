@@ -44,6 +44,36 @@ function assignRoles(players, location){
   });
 }
 
+function assignCleanPlayers(players, spyIndex, n) {
+  var count = 0;
+  var clean_players = [];
+  for (var i = 0; i < n; i++) {
+    if (i != spyIndex) {
+      clean_players.push(i);
+    }
+  }
+
+  var playerIDs = {};
+  players.forEach(function(player, index){
+    playerIDs[index] = player._id;
+  });
+
+  var shuffled_players = shuffleArray(clean_players);
+  var playerMap = {};
+  for (var i = 0; i < shuffled_players.length; i++) {
+    var index = shuffled_players[i];
+    var nextIndex = shuffled_players[(i + 1) % (n - 1)];
+    playerMap[index] = nextIndex;
+  }
+
+  players.forEach(function(player, index){
+    if (!player.isSpy) {
+      var next_id = playerIDs[playerMap[index]];
+      Players.update(player._id, {$set: {knows: next_id}});
+    }
+  });
+}
+
 Meteor.startup(function () {
   // Delete all games and players at startup
   Games.remove({});
@@ -78,7 +108,7 @@ Games.find({"state": 'settingUp'}).observeChanges({
       }});
     });
 
-    assignRoles(players, location);
+    assignCleanPlayers(players, spyIndex, players.count());
 
     Games.update(id, {$set: {state: 'inProgress', location: location, endTime: gameEndTime, paused: false, pausedTime: null}});
   }
