@@ -15,21 +15,24 @@ function getCurrentPlayer(){
 }
 
 function getMessages(messagesArray) {
-  messages = [];
-  for (var i = 0; i < messagesArray.length; i++) {
-    var fromPlayer = Players.findOne(messagesArray[i].sendFrom);
+    messages = [];
+    messagesArray.forEach( function(msg, index) {
+	var fromPlayer = Players.findOne(msg.sendFrom);
 
-    var message = { message: messagesArray[i].msgContent, 
-                    from: fromPlayer.name };
-    messages.push(message);
-  }
-  return messages;
+	var message = { message: msg.msgContent, 
+			from: fromPlayer.name };
+	messages.push(message);
+    });
+
+    return messages;
 }
 
 Template.revealView.events({
   'click .btn-continue': function () {
-    // Increase round number
-    Session.set("currentView", "gameView");
+      // Increase round number
+       Games.update(game._id, {$inc: {round: 1}});
+      // Session.set("currentView", "gameView");
+      return false;
   }
 });
 
@@ -37,18 +40,21 @@ Template.revealView.helpers({
   game: getCurrentGame,
   player: getCurrentPlayer,
   messages: function () {
-    var msg1 = { message: 'hello this is the message okay?', from: 'me'};
-    var msg2 = { message: 'hi I am not the one', from: 'you'};
-    messages = [msg1, msg2];
-    return messages;
+    // var msg1 = { message: 'hello this is the message okay?', from: 'me'};
+    // var msg2 = { message: 'hi I am not the one', from: 'you'};
+    // messages = [msg1, msg2];
+    // return messages;
 
-    // var game = getCurrentGame();
-    // var player = getCurrentPlayer();
-    // var messagesArray = Messages.find({gameID: game._id, roundNum: game.round, sendTo: player._id});
-    // return getMessages(messagesArray);
+   // var game = getCurrentGame();
+   //   var player = getCurrentPlayer();
+      console.log(game._id);
+      console.log(player._id);
+    var messagesArray = Messages.find({gameID: game._id, roundNum: game.round, sendTo: player._id});
+    return getMessages(messagesArray);
   },
   isStarting: function() {
-    var player = getCurrentPlayer();
+      //var player = getCurrentPlayer();
+      console.log(player);
     return player.isLeader;
   }
 });
