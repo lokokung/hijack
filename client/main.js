@@ -122,8 +122,9 @@ function trackGameState () {
   }
 
   if(game.state === "inProgress"){
-    Session.set("currentView", "gameView"); 
+    //Session.set("currentView", "gameView"); 
     //Session.set("currentView", "distractView");
+    Session.set("currentView", "hijackView");
   } else if (game.state === "waitingForPlayers") {
     Session.set("currentView", "lobby");
   }
