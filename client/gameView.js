@@ -70,6 +70,14 @@ Template.gameView.helpers({
     var timeRemaining = getTimeRemaining();
 
     return moment(timeRemaining).format('mm[<span>:</span>]ss');
+  },
+  isStarting: function() {
+    var player = getCurrentPlayer();
+    return player.isLeader;
+  },
+  knownPlayer: function() {
+    var player = getCurrentPlayer();
+    return Players.findOne(player.knows);
   }
 });
 

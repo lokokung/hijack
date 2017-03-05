@@ -6,27 +6,9 @@
 
     <div class="status-container-content">
       {{#if player.isSpy }}
-        <div class="player-status player-status-spy">{{_ "ui.you are the spy" }}</div>
+        <div class="player-status player-status-spy">You are the hijacker.</div>
       {{else}}
-        <div class="player-status player-status-not-spy">{{{_ "ui.you are not the spy" }}}</div>
-
-        <div class="current-location">
-          <div class="current-location-header">
-            {{_ "ui.the location" }}:
-          </div>
-          <div class="current-location-name">
-            {{_ game.location.name }}
-          </div>
-        </div>
-
-        <div class="current-role">
-          <div class="current-role-header">
-            {{_ "ui.your role" }}:
-          </div>
-          <div class="current-role-name">
-            {{_ player.role }}
-          </div>
-        </div>
+        <div class="player-status player-status-not-spy">You know {{ knownPlayer.name }} isn't the hijacker.</div>
       {{/if}}
     </div>
   </div>
@@ -59,7 +41,9 @@
   <hr>
 
   <div class="button-container">
-    <button class="btn-end">{{_ "ui.end game" }}</button>
+    {{#if isStarting }}
+      <button class="btn-end">{{_ "ui.end game" }}</button>
+    {{/if}}
     <button class="btn-leave">{{_ "ui.leave game" }}</button>
   </div>
 </template>
