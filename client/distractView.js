@@ -30,7 +30,7 @@ Template.distractView.events({
   'submit #random-question': function (event) {
     var answer = event.target.playerAnswer.value;
 
-    if (!answer || gameFinished) {
+    if (!answer) {
       return false;
     } else {
       // Session.set("currentView", "startMenu");
@@ -55,7 +55,7 @@ Template.distractView.helpers({
             containing Lorem Ipsum passages, and more \
             recently with desktop publishing software like \
             Aldus PageMaker including versions of Lorem Ipsum."
-  },
+  }/*,
   timeRemaining: function () {
     var timeRemaining = getTimeRemaining();
 
@@ -69,5 +69,5 @@ Template.distractView.helpers({
     var timeRemaining = getTimeRemaining();
 
     return timeRemaining === 0;
-  }
+  } */
 });

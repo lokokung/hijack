@@ -132,7 +132,11 @@ function trackGameState () {
   } else if (game.state === "startHijack") {
     Session.set("currentView", "distractView");
   } else if (game.state === "revealMsg") {
-    Session.set("currentView", "revealView");
+      Session.set("currentView", "revealView");
+  } else if (game.state === "voting") {
+      Session.set("currentView", "voteView");
+  } else if (game.state === "doneVoting") {
+    Session.set("currentView", "endView")
   }
 }
 

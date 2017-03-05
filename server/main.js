@@ -141,7 +141,7 @@ Players.find().observeChanges({
 	    var players = Players.find({gameID: game._id});
 	    var allVotesIn = true;
 	    players.forEach(function(player, index) {
-		if (!player.vote) {
+		if (!player.vote && !player.isSpy) {
 		    allVotesIn = false;
 		}
 	    });
