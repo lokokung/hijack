@@ -122,7 +122,9 @@ function trackGameState () {
   }
 
   if(game.state === "inProgress"){
-    Session.set("currentView", "gameView");
+    //Session.set("currentView", "gameView"); 
+    //Session.set("currentView", "distractView");
+    Session.set("currentView", "hijackView");
   } else if (game.state === "waitingForPlayers") {
     Session.set("currentView", "lobby");
   }
@@ -236,6 +238,10 @@ Template.lobby.helpers({
   isLoading: function() {
     var game = getCurrentGame();
     return game.state === 'settingUp';
+  },
+  isStarting: function() {
+    var player = getCurrentPlayer();
+    return player.isLeader;
   }
 });
 

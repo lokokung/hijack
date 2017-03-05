@@ -1,6 +1,6 @@
 <head>
   <meta charset="utf-8">
-  <title>Spyfall</title>
+  <title>Hijack</title>
 
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <link href='http://fonts.googleapis.com/css?family=Raleway:400,300,600' rel='stylesheet' type='text/css'>
@@ -70,7 +70,9 @@
   <hr>
 
   <div class="button-container">
-    <button class="btn-start">{{_ "ui.start game" }}</button>
+    {{#if isStarting }}
+      <button class="btn-start">{{_ "ui.start game" }}</button>
+    {{/if}}
     <button class="btn-leave">{{_ "ui.leave game" }}</button>
   </div>
 </template>
