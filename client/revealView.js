@@ -34,7 +34,7 @@ Template.revealView.events({
       Games.update(game._id, {$inc: {round: 1}});
       var players = Players.find({gameID: game._id})
       var round = game.round;
-      if (round > players.count()) {
+      if (round + 2 > players.count()) {
 	  Games.update(game._id, {$set: {state: 'voting'}})
       }
       else {

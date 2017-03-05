@@ -104,13 +104,13 @@ Template.voteView.events({
     }
   },
   'click .player-name': function (event) {
-    event.currentTarget.className = 'player-name-selected';
+    event.currentTarget.className = 'player-name-voted';
     if (clickedPlayer) {
       clickedPlayer.className = 'player-name';
     }
     clickedPlayer = event.currentTarget;
   },
-  'click .player-name-selected': function(event) {
+  'click .player-name-voted': function(event) {
       event.currentTarget.className = 'player-name';
       clickedPlayer = null;
   },
