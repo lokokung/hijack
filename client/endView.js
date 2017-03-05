@@ -74,7 +74,6 @@ Template.endView.helpers({
   voteRank: function () {
     var game = getCurrentGame();
     var players = Players.find({'gameID': game._id});
-    //var votes = {"a":1, "b":3, "c":2};
     var votes = {};
       players.forEach(function(player){
         if (!player.isSpy){

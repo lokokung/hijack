@@ -92,11 +92,6 @@ Template.hijackView.helpers({
     return timeRemaining === 0;
   },
   messages: function () {
-    // var msg1 = { message: 'hello', from: 'me', to: 'you', id: '050'};
-    // var msg2 = { message: 'hi', from: 'you', to: 'me', id: '1'};
-    // messages = [msg1, msg2];
-    // return messages;
-
     var game = getCurrentGame();
     var messagesArray = Messages.find({gameID: game._id, roundNum: game.round});
     getMessages(messagesArray);

@@ -36,35 +36,6 @@ function getLanguageDirection() {
   }
 }
 
-function getLanguageList() {
-  var languages = TAPi18n.getLanguages();
-  var languageList = _.map(languages, function(value, key) {
-    var selected = "";
-
-    if (key == getUserLanguage()){
-      selected = "selected";
-    }
-
-    // Gujarati isn't handled automatically by tap-i18n,
-    // so we need to set the language name manually
-    if (value.name == "gu"){
-        value.name = "ગુજરાતી";
-    }
-
-    return {
-      code: key,
-      selected: selected,
-      languageDetails: value
-    };
-  });
-
-  if (languageList.length <= 1){
-    return null;
-  }
-
-  return languageList;
-}
-
 function getCurrentGame(){
   var gameID = Session.get("gameID");
 
@@ -123,8 +94,6 @@ function trackGameState () {
 
   if (game.state === "inProgress") {
     Session.set("currentView", "gameView"); 
-    //Session.set("currentView", "distractView");
-    //Session.set("currentView", "hijackView");
   } else if (game.state === "waitingForPlayers") {
     Session.set("currentView", "lobby");
   } else if (game.state === "startHijack" && player.isSpy) {
@@ -200,22 +169,6 @@ Template.main.helpers({
   }
 });
 
-Template.footer.helpers({
-  languages: getLanguageList
-})
-
-Template.footer.events({
-  'click .btn-set-language': function (event) {
-    var language = $(event.target).data('language');
-    setUserLanguage(language);
-    GAnalytics.event("language-actions", "set-language-" + language);
-  },
-  'change .language-select': function (event) {
-    var language = event.target.value;
-    setUserLanguage(language);
-    GAnalytics.event("language-actions", "set-language-" + language);
-  }
-})
 
 Template.lobby.helpers({
   game: function () {

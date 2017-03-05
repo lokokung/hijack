@@ -3,8 +3,8 @@ Hijack is a web app game meant to be played on mobile devices with friends. Simi
 
 The details on gameplay are posted below the buttons on the homepage. Tools and technologies used for this project include Meteor.js, Handlebars.js, MongoDB, JavaScript, CSS, and HTML.
 
-# Disclaimer
-This game was made in 24 hours at a hackathon. Hence, it gets a bit hacky toward the end (but it works).
+## Play
+Come play at http://hijack-play.herokuapp.com/! :space_invader:
 
-# Play
-Come play at http://hijack-play.herokuapp.com/!
+## Disclaimer
+This game was made in 24 hours at a hackathon. Hence, it may get a bit hacky toward the end.

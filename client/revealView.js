@@ -49,11 +49,6 @@ Template.revealView.helpers({
   game: getCurrentGame,
   player: getCurrentPlayer,
   messages: function () {
-     //var msg1 = { message: 'hello this is the message okay?', from: 'me'};
-     //var msg2 = { message: 'hi I am not the one', from: 'you'};
-     //messages = [msg1, msg2];
-     //return messages;
-
    var game = getCurrentGame();
       var player = getCurrentPlayer();
       console.log(game._id);
