@@ -25,9 +25,6 @@ function generateNewMessage(game, from, to, msg) {
 
   var msgID = Messages.insert(msg);
   console.log(msgID);
-  msg = Messages.findOne(msgID);
-
-  return msg;
 }
 
 function leaveGame () {
@@ -139,9 +136,11 @@ Template.gameView.events({
        var sendTo = Players.findOne({gameID: game._id, name: receiverName});
        var msg = event.target.privateMessage.value;
        console.log(msg);
-       msg = generateNewMessage(gameID, roundNum, sendFrom, sendTo, msg);
+       generateNewMessage(gameID, roundNum, sendFrom, sendTo, msg);
      } else {
        FlashMessages.sendError("Please select someone to message.");
      }
+
+    return false;
   }
 });
